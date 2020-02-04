@@ -44,7 +44,7 @@ namespace Tonari.Unity
 
         public virtual void Dispose() { }
 
-        protected virtual void Initialize()
+        public virtual void Initialize()
         {
             SceneManager.sceneLoaded += SceneLoaded;
             SceneManager.sceneUnloaded += SceneUnloaded;
@@ -64,6 +64,8 @@ namespace Tonari.Unity
                 {
                     gameModeCache.TryAdd(scene, gameMode);
                 }
+
+                gameMode.Initialize();
             }
             else if (loadSceneMode == LoadSceneMode.Additive)
             {

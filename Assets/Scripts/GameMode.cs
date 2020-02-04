@@ -6,6 +6,7 @@ namespace Tonari.Unity
     [Serializable]
     public abstract class GameMode : IDisposable
     {
+        public virtual void Initialize() { }
         public virtual void Dispose() { }
     }
 
@@ -19,6 +20,16 @@ namespace Tonari.Unity
             }
 
             return GameInstance.Current.GetGameMode(gameObject.scene) as TGameMode ?? null;
+        }
+
+        public static TGameInstance GetGameInstance<TGameInstance>(this GameObject gameObject) where TGameInstance : GameInstance
+        {
+            if (!gameObject.scene.IsValid())
+            {
+                return null;
+            }
+
+            return GameInstance.Current as TGameInstance ?? null;
         }
     }
 }
