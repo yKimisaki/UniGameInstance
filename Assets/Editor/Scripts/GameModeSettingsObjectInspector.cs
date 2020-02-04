@@ -7,12 +7,6 @@ namespace Tonari.UnityEditor
     [CustomEditor(typeof(GameModeSettingsObject), false)]
     public class GameModeSettingsObjectInspector : Editor
     {
-        [MenuItem("Assets/GameMode/Select GameInstance")]
-        public static void SelectGameInstance()
-        {
-
-        }
-
         public override void OnInspectorGUI()
         {
             var settings = serializedObject.targetObject as GameModeSettingsObject;

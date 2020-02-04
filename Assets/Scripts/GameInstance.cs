@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 namespace Tonari.Unity
 {
     [Serializable]
-    public abstract class GameInstance
+    public abstract class GameInstance : IDisposable
     {
         public const string AssetName = "GameModeSettings";
         public const string AssetRelativeDirectory = "Resources";
@@ -27,10 +27,22 @@ namespace Tonari.Unity
             var resourcesTrimed = AssetRelativeDirectory.StartsWith("Resources") ? AssetRelativeDirectory.Substring("Resources".Length) : AssetRelativeDirectory;
             settings = Resources.Load<GameModeSettingsObject>($"{(string.IsNullOrEmpty(resourcesTrimed) ? "" : resourcesTrimed + "/")}{AssetName}");
 
-            Current = DeepCopy(settings.GameInstance) as GameInstance;
+            InitializeInstance();
+        }
 
+        public static void ResetInstance()
+        {
+            Current.Dispose();
+            InitializeInstance();
+        }
+
+        private static void InitializeInstance()
+        {
+            Current = DeepCopy(settings.GameInstance) as GameInstance;
             Current.Initialize();
         }
+
+        public virtual void Dispose() { ]}
 
         protected virtual void Initialize()
         {
