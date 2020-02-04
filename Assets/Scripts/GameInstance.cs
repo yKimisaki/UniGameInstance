@@ -42,7 +42,7 @@ namespace Tonari.Unity
             Current.Initialize();
         }
 
-        public virtual void Dispose() { ]}
+        public virtual void Dispose() { }
 
         protected virtual void Initialize()
         {
